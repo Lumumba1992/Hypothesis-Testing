@@ -1,0 +1,567 @@
+---
+title: "DAY ONE"
+author: "YOU ARE THE AUTHOR"
+date: "2023-10-11"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+    fig_width: 10
+    fig_height: 10
+  word_document:
+    toc: yes
+---
+
+\newpage
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE,comment = NA, message=FALSE,
+                      fig.height=4, fig.width=6)
+```
+
+# MATRIX
+## Matrix Creation
+```{r}
+A = matrix(c(5,6,2,8,9,2,4,5,1),ncol = 3, nrow = 3, byrow = T)
+A
+```
+
+## Getting the determinant of a matrix
+```{r}
+det(A)
+```
+
+## Inverse
+```{r}
+solve(A)
+```
+
+## Matrix Operation 
+```{r}
+B <- matrix(c(3,4,6,2,3,4,5,2,5), ncol = 3, nrow = 3, byrow = T)
+C <- matrix(c(8,5,3,2,3,5,9,3,3), ncol = 3, nrow = 3, byrow = T)
+```
+
+## View the matrix
+```{r}
+B
+C
+```
+
+## Matrix Addition
+```{r}
+B+C
+```
+
+## Matrix Subtraction
+```{r}
+B-C
+```
+
+## Matrix Division
+```{r}
+B/C
+```
+
+## Matrix Multiplication
+```{r}
+B*C
+B%*%C
+```
+
+## Getting the Identity Matrix
+```{r}
+zapsmall(solve(A)%*%A)
+```
+
+# Mathematical Operations
+## Addition
+```{r}
+y = 45+65
+y
+```
+
+## Subtraction
+```{r}
+x = 563-546
+x
+```
+
+## Division
+```{r}
+m = 563/87
+m
+```
+
+## Multiplication
+```{r}
+t = 56*56
+t
+```
+
+## Squares and Square roots
+```{r}
+sqrt(81)
+sqrt(225)
+225^0.5
+5^2
+```
+
+## Exponentials and Logarithmic
+```{r}
+log10(100)
+```
+
+## To be checked!!!!!!
+```{r}
+exp(2)
+```
+
+# Data Importation (Comma Seperated Values, csv)
+```{r}
+data <- read.csv("Gapminder.csv")
+head(data,5)
+tail(data,5)
+```
+
+## Check the structure of the data
+```{r}
+str(data)
+```
+
+## Manual Data Entry
+```{r}
+age <- c(45,65,34,32,23,25,56,76,45,22,21,45,34,56,54)
+age
+height <- c(122,134,144,165,155,133,123,132,145,154,166,134,121,154,165)
+height
+```
+
+## Column Binding
+```{r}
+height_age <- cbind(age, height)
+height_age
+```
+
+## Data Framing
+```{r}
+mydata <- data.frame(age, height)
+head(mydata,5)
+```
+
+
+## Descriptive Statistics
+```{r}
+library(stargazer)
+library(gtsummary)
+stargazer(data[,-2], type = "text")
+```
+
+## Additional Way of Displaying Summary Statistics.
+```{r}
+### Load the libraries
+library(ggplot2)
+library(devtools)
+library(predict3d)
+library(psych)
+library(dplyr)
+library(gtsummary)
+library(DescTools)
+library(nortest) 
+library(lmtest)
+library(sandwich)
+```
+
+## Display the Summary Statistics
+```{r}
+knitr::kable(
+  describeBy(data[,-1]) %>% round(2) 
+)
+```
+
+### Correlationa and Covariances
+```{r}
+data22 <- read.csv("german_credit__data.csv")
+attach(data22)
+head(data22,5)
+```
+
+### How many observations do we have in our data set
+```{r}
+str(data22)
+```
+
+### Identify the missing observations for each variables
+```{r}
+library(mlr)
+library(tidyverse)
+map_dbl(data22, ~sum(is.na(.)))
+```
+
+### Eliminate Missing Observations
+```{r}
+data22<- na.omit(data22)
+```
+
+### Confirm the Remaining Observations
+```{r}
+str(data22)
+```
+
+### Confirm if the data set still has missing observations
+```{r}
+map_dbl(data22, ~sum(is.na(.)))
+```
+
+### Attach the Cleaned Data
+```{r}
+attach(data22)
+```
+
+### Frequency Distribution
+```{r}
+library(sjmisc)
+frq(data22, Sex, Purpose, Housing)
+```
+
+### Different to Display Frequency Table Above
+```{r}
+library(foreign) # for importing the Stata v12 dataset
+library(dplyr)
+library(tidyverse) # has drop_na() function
+library(ggplot2)
+library(scales) # percent function
+library(kableExtra) # display table formatting
+```
+
+### The Covariance Matrix
+```{r}
+COV <- data.frame(Age, Credit.amount,Duration)
+head(COV,5)
+```
+
+
+```{r}
+stargazer(cov(COV), type = "text")
+```
+### Correlation Matrix
+```{r}
+COR <- data.frame(Age, Credit.amount,Duration)
+head(COR,5)
+```
+
+```{r}
+cor(COR)
+```
+
+### Visualize the Results in Stargazer
+```{r}
+stargazer(cor(COR),type = "text")
+```
+
+### Basic R Commands
+* head
+* tail
+* str
+* list
+* attach
+* Renaming data set
+* View
+
+### Example of how these commands are used
+```{r}
+list(data22)
+```
+
+### Data Visualization
+#### Histogram
+```{r}
+hist(data$gdp_cap, 
+     breaks = 45, 
+     xlab = "gdp per capita", 
+     ylab = "Frequency", 
+     main = "Histogram Showing the distribution of gdp per capita")
+```
+
+### Line Chart
+```{r}
+### Import the data
+line_plot <- read.csv("training model.csv")
+attach(line_plot)
+head(line_plot,5)
+```
+
+### Multiple Line plot
+```{r}
+library(ggplot2)
+ggplot(data = line_plot, aes(x = year)) +
+  geom_line(aes(y = CPI, color = "Consumer Price Index")) +
+  geom_line(aes(y = Exch.Rate, color = "Exchange Rate")) +
+  geom_line(aes(y = Lend.Int.Rates, color = "Lending Interest Rate")) +
+  labs(x = "Time (years)", y = "Rates", color = "Lines") +
+  scale_color_manual(values = c("blue", "red", "green")) +
+  ggtitle("Line Plots Showing Trends in CPI, Exchange Rate and Lending Interest Rates") +
+  theme_minimal()
+```
+
+```{r}
+gdp_growth <- read.csv("gdp_growth.csv")
+attach(gdp_growth)
+head(gdp_growth,5)
+tail(gdp_growth,5)
+```
+
+```{r fig.width=10, fig.height=6}
+ggplot(data = gdp_growth, aes(x = year)) +
+  geom_line(aes(y = GDP.growth..annual..., color = "GDP Growth (%)")) +
+  labs(x = "Time (years)", y = "GDP Growth", color = "Lines") +
+  scale_color_manual(values = c("blue")) +
+  ggtitle("Line Plots Showing Trends GDP Growth over time") +
+  theme_minimal()
+```
+
+### Alternative Good Looking Plot
+```{r fig.width=10, fig.height=6}
+date<-seq(as.Date("1961-01-01"),by="1 year",length.out=length(gdp_growth$year))
+ggplot(data=gdp_growth,aes(x=date))+
+  geom_line(aes(y=GDP.growth..annual...,colour="GDP.growth..annual..."))+
+  labs(title="Trends of GDP Growth Rate over Time",
+       caption="", y="GDP Rate", x="Time in Years", color="Key")+
+  scale_x_date( date_labels = "%Y", breaks = "1 year")+
+  theme(axis.text.x = element_text(angle = 90, vjust=0.5, size = 8))
+```
+
+
+### Additional Chart
+```{r}
+data <- read.csv("Gapminder.csv")
+head(data,5)
+attach(data)
+```
+
+
+### A scatter plot with Regression Equation
+```{r}
+income <- read.csv("income.csv")
+attach(income)
+head(income,5)
+```
+
+```{r}
+library(ggpmisc)
+library(ggplot2)
+ggplot(data = income, aes(x = Income, y = Consumption)) +
+  stat_poly_line() +
+  stat_poly_eq(eq.with.lhs = "italic(hat(y))~`=`~",
+               use_label(c("eq", "R2"))) +
+  ggtitle("A scatter plot of Income and Consumption") +
+  geom_point()
+```
+
+### Additional Scatter Plot
+```{r}
+data <- read.csv("Gapminder.csv")
+head(data,5)
+attach(data)
+```
+
+```{r}
+ggplot(data = data, aes(x = ln_gdpPercap, y = ln_life_exp)) +
+  stat_poly_line() +
+  stat_poly_eq(eq.with.lhs = "italic(hat(y))~`=`~",
+               use_label(c("eq", "R2"))) +
+  ggtitle("A scatter plot of life expectancy and gdp per capita") +
+  geom_point()
+```
+
+### Box Plot
+```{r}
+boxplot(life_exp ~ continent, main ="Box plots of lifeExp across continents",
+        xlab="Continents",ylab="lifeExp",
+        col=rainbow(5))
+```
+
+### Bar Graph
+#### Load the data
+```{r}
+BAR <- read.csv("superstore.csv")
+attach(BAR)
+head(BAR,5)
+```
+
+### Create Grouped Summaries
+```{r}
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+
+SUM <- BAR %>%
+  group_by(Ship_Mode) %>%
+  get_summary_stats(Sales, type = "mean_sd")
+SUM
+```
+
+### Create the Bar Graph
+```{r}
+ggplot(data = SUM, aes(x = Ship_Mode, y = mean)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(x = "Ship_Mode", y = "Mean") +
+  ggtitle("Bar Graph of Average Sales for Various Ship Modes") +
+  theme_minimal()
+```
+
+### Additional Bar Graph
+```{r}
+SUM2 <- BAR %>%
+  group_by(Sub_Category) %>%
+  get_summary_stats(Sales, type = "mean_sd")
+SUM2
+```
+
+### Run the Command below to Create the bar graph of mean sales across Sub categories
+```{r}
+ggplot(data = SUM2, aes(x = Sub_Category, y = mean)) +
+  geom_bar(stat = "identity", fill = "black") +
+  labs(x = "Sub Category", y = "Mean") +
+  ggtitle("Bar Graph of Average Sales for Various Sub Category") +
+  theme_minimal()+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+
+
+### LINEAR REGRESSION ANALYSIS
+Statistical techniques are tools that enable us to answer questions about possible patterns in empirical data. It is not surprising, then, to learn that many important techniques of statistical analysis were developed by scientists who were interested in answering very specific empirical questions. So it was with regression analysis. The history of this particular statistical technique can be traced back to late nineteenth-century England and the pursuits of a gentleman scientist, Francis Galton. Galton was born into a wealthy family that produced more than its share of geniuses; he and Charles Darwin, the famous biologist, were first cousins. During his lifetime, Galton studied everything from fingerprint classification to meteorology, but he gained widespread recognition primarily for his work on inheritance. His most important insight came to him while he was studying the inheritance of one of the most obvious of all human characteristics: height. In order to understand how the characteristic of height was passed from one generation to the next, Galton collected data on the heights of individuals and the heights of their parents. After constructing frequency tables that classified these individuals both by their height and by the average height of their parents, Galton came to the unremarkable conclusion that tall people usually had tall parents and short people usually had short parents.
+
+### Assumption of Regression Analysis
+
+*1. Zero conditional mean: The error term has a population mean of zero*
+*2. Endogeniety: All independent variables are uncorrelated with the error term*
+*3. Autocorrelation: Observations of the error term are uncorrelated with each other*
+*4. Homoscedasticity: The error term has a constant variance*
+*5. Multicollinearity: No independent variable is a perfect linear function of other explanatory variables*
+*6. Normality of the error terms: The error term is normally distributed (optional)*
+
+### Load the data
+```{r}
+mydatta <- read.csv("Unemployment.csv")
+attach(mydatta)
+head(mydatta,5)
+```
+
+### To be continued!!!!
+### Estimate the Model
+```{r}
+my_model <- lm(log(Inflation)~log(Unemployment)+log(FedRate), data = mydatta)
+```
+
+### Visualize the Model Using Stargazer Library
+```{r}
+library(stargazer)
+stargazer(my_model, type = "text")
+```
+
+### Model Interpretation
+The model above presents the results of a regression analysis with the dependent variable "log(Inflation)" and three independent variables: "log(Unemployment)", "log(FedRate)", and the constant term.
+The coefficients estimated for each independent variable represent the relationship between that variable and the dependent variable while holding other variables constant. The coefficients are accompanied by standard errors in parentheses.
+
+*log(Unemployment):* 
+The coefficient estimate for log(Unemployment) is 0.176. This means that a one-unit increase in the natural logarithm of unemployment is associated with a 0.176 unit increase in the natural logarithm of inflation. The standard error of 0.157 indicates the uncertainty in this estimate.
+
+*log(FedRate):*
+The coefficient estimate for log(FedRate) is 0.976. This suggests that a one-unit increase in the natural logarithm of the Federal Reserve interest rate is associated with a 0.976 unit increase in the natural logarithm of inflation. The standard error of 0.085 provides an indication of the precision of this estimate.
+
+*Constant:*
+The constant term in the model is -0.902. This represents the expected value of the natural logarithm of inflation when all independent variables are zero. The standard error of 0.291 reflects the uncertainty in this estimation.
+
+The observations in the dataset used for the analysis are 164. The R-squared value of 0.473 indicates that approximately 47.3% of the variance in the natural logarithm of inflation can be explained by the independent variables included in the model. The adjusted R-squared value of 0.466 on the other hand accounts for the degrees of freedom in the model and provides a more conservative estimate of the proportion of variance explained.
+
+The residual standard error of 0.498 indicates the average deviation of the observed values of the dependent variable from the predicted values, taking into account the degrees of freedom in the model.
+
+The F-statistic of 72.167, with 2 and 161 degrees of freedom, suggests that the overall model is statistically significant. The associated p-value is less than 0.01, indicating strong evidence against the null hypothesis of no relationship between the independent variables and the dependent variable.
+
+In summary, the model suggests that only log(Unemployment) has a statistically significant relationship with log(Inflation). However, it is important to note that these interpretations are based on the given coefficients, standard errors, and significance levels. Further analysis and consideration of the model's assumptions are necessary for a comprehensive understanding of the relationships between the variables.
+
+## Testing the Assumptions
+### Normality of the error term
+```{r}
+library(forecast)
+checkresiduals(my_model)
+```
+
+### Zero Conditional Mean
+```{r}
+ReSid<-resid(my_model)
+```
+
+### Add the residual variable to the data set
+```{r}
+mydatta$ReSid <- ReSid
+head(mydatta,5)
+```
+
+### View Summary Statistics
+### Additional Way of Displaying Summary Statistics.
+```{r}
+### Load the libraries
+library("ggplot2")
+library("devtools")
+library("predict3d")
+library("psych")
+library("dplyr")
+library("gtsummary")
+library("DescTools")
+library("nortest") 
+library("lmtest")
+library("sandwich")
+```
+
+### Display the Summary Statistics
+```{r}
+knitr::kable(
+  describeBy(mydatta[,-1]) %>% round(3) 
+)
+```
+
+
+### The variance covariance assumption
+```{r}
+cov(ReSid, Unemployment)
+cov(ReSid, FedRate)
+```
+
+```{r}
+cor.test(mydatta$Unemployment, mydatta$ReSid)
+
+```
+
+```{r}
+cor.test(mydatta$FedRate, mydatta$ReSid)
+```
+
+### Plot the Residuals
+```{r}
+ts.plot(ReSid)
+abline(0,0.0000)
+```
+
+### Multicollinearity
+```{r}
+library(car)
+library(tseries)
+vif(my_model)
+```
+
+### Heteroscedasticity
+```{r}
+ncvTest(my_model)
+```
+
+Since the p-value is greater than the conventional significance level of 0.05, we fail to reject the null hypothesis of constant variance. This means that there is not enough evidence to conclude that the variance of the residuals varies across the range of the predictor variable(s).
+
+### Autocorrelation
+```{r}
+durbinWatsonTest(my_model)
+```
+
+

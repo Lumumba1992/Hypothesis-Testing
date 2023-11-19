@@ -1,0 +1,711 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={DAY ONE},
+  pdfauthor={YOU ARE THE AUTHOR},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{DAY ONE}
+\author{YOU ARE THE AUTHOR}
+\date{2023-10-11}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\newpage
+
+\hypertarget{matrix}{%
+\section{MATRIX}\label{matrix}}
+
+\hypertarget{matrix-creation}{%
+\subsection{Matrix Creation}\label{matrix-creation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{ncol =} \DecValTok{3}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{byrow =}\NormalTok{ T)}
+\NormalTok{A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]    5    6    2
+[2,]    8    9    2
+[3,]    4    5    1
+\end{verbatim}
+
+\hypertarget{getting-the-determinant-of-a-matrix}{%
+\subsection{Getting the determinant of a
+matrix}\label{getting-the-determinant-of-a-matrix}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{det}\NormalTok{(A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3
+\end{verbatim}
+
+\hypertarget{inverse}{%
+\subsection{Inverse}\label{inverse}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{solve}\NormalTok{(A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           [,1]       [,2] [,3]
+[1,] -0.3333333  1.3333333   -2
+[2,]  0.0000000 -1.0000000    2
+[3,]  1.3333333 -0.3333333   -1
+\end{verbatim}
+
+\hypertarget{matrix-operation}{%
+\subsection{Matrix Operation}\label{matrix-operation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{), }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{byrow =}\NormalTok{ T)}
+\NormalTok{C }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{byrow =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{view-the-matrix}{%
+\subsection{View the matrix}\label{view-the-matrix}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]    3    4    6
+[2,]    2    3    4
+[3,]    5    2    5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{C}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]    8    5    3
+[2,]    2    3    5
+[3,]    9    3    3
+\end{verbatim}
+
+\hypertarget{matrix-addition}{%
+\subsection{Matrix Addition}\label{matrix-addition}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B}\SpecialCharTok{+}\NormalTok{C}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]   11    9    9
+[2,]    4    6    9
+[3,]   14    5    8
+\end{verbatim}
+
+\hypertarget{matrix-subtraction}{%
+\subsection{Matrix Subtraction}\label{matrix-subtraction}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B}\SpecialCharTok{{-}}\NormalTok{C}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]   -5   -1    3
+[2,]    0    0   -1
+[3,]   -4   -1    2
+\end{verbatim}
+
+\hypertarget{matrix-division}{%
+\subsection{Matrix Division}\label{matrix-division}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B}\SpecialCharTok{/}\NormalTok{C}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+          [,1]      [,2]     [,3]
+[1,] 0.3750000 0.8000000 2.000000
+[2,] 1.0000000 1.0000000 0.800000
+[3,] 0.5555556 0.6666667 1.666667
+\end{verbatim}
+
+\hypertarget{matrix-multiplication}{%
+\subsection{Matrix Multiplication}\label{matrix-multiplication}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B}\SpecialCharTok{*}\NormalTok{C}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]   24   20   18
+[2,]    4    9   20
+[3,]   45    6   15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B}\SpecialCharTok{\%*\%}\NormalTok{C}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]   86   45   47
+[2,]   58   31   33
+[3,]   89   46   40
+\end{verbatim}
+
+\hypertarget{getting-the-identity-matrix}{%
+\subsection{Getting the Identity
+Matrix}\label{getting-the-identity-matrix}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{zapsmall}\NormalTok{(}\FunctionTok{solve}\NormalTok{(A)}\SpecialCharTok{\%*\%}\NormalTok{A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]    1    0    0
+[2,]    0    1    0
+[3,]    0    0    1
+\end{verbatim}
+
+\hypertarget{mathematical-operations}{%
+\section{Mathematical Operations}\label{mathematical-operations}}
+
+\hypertarget{addition}{%
+\subsection{Addition}\label{addition}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{=} \DecValTok{45}\SpecialCharTok{+}\DecValTok{65}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 110
+\end{verbatim}
+
+\hypertarget{subtraction}{%
+\subsection{Subtraction}\label{subtraction}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{=} \DecValTok{563{-}546}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 17
+\end{verbatim}
+
+\hypertarget{division}{%
+\subsection{Division}\label{division}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m }\OtherTok{=} \DecValTok{563}\SpecialCharTok{/}\DecValTok{87}
+\NormalTok{m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6.471264
+\end{verbatim}
+
+\hypertarget{multiplication}{%
+\subsection{Multiplication}\label{multiplication}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t }\OtherTok{=} \DecValTok{56}\SpecialCharTok{*}\DecValTok{56}
+\NormalTok{t}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3136
+\end{verbatim}
+
+\hypertarget{squares-and-square-roots}{%
+\subsection{Squares and Square roots}\label{squares-and-square-roots}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{81}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{225}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{225}\SpecialCharTok{\^{}}\FloatTok{0.5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5}\SpecialCharTok{\^{}}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 25
+\end{verbatim}
+
+\hypertarget{exponentials-and-logarithmic}{%
+\subsection{Exponentials and
+Logarithmic}\label{exponentials-and-logarithmic}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{log10}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2
+\end{verbatim}
+
+\hypertarget{to-be-checked}{%
+\subsection{To be checked!!!!!!}\label{to-be-checked}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{exp}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 7.389056
+\end{verbatim}
+
+\hypertarget{data-importation-comma-seperated-values-csv}{%
+\section{Data Importation (Comma Seperated Values,
+csv)}\label{data-importation-comma-seperated-values-csv}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Gapminder.csv"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(data,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      country year population continent life_exp  gdp_cap ln_population
+1 Afghanistan 1952    8425333      Asia   28.801 779.4453      6.925587
+2 Afghanistan 1957    9240934      Asia   30.332 820.8530      6.965716
+3 Afghanistan 1962   10267083      Asia   31.997 853.1007      7.011447
+4 Afghanistan 1967   11537966      Asia   34.020 836.1971      7.062129
+5 Afghanistan 1972   13079460      Asia   36.088 739.9811      7.116590
+  ln_life_exp ln_gdpPercap
+1    1.459408     6.658583
+2    1.481901     6.710344
+3    1.505109     6.748878
+4    1.531734     6.728864
+5    1.557363     6.606625
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(data,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      country year population continent life_exp  gdp_cap ln_population
+1700 Zimbabwe 1987    9216418    Africa   62.351 706.1573      6.964562
+1701 Zimbabwe 1992   10704340    Africa   60.377 693.4208      7.029560
+1702 Zimbabwe 1997   11404948    Africa   46.809 792.4500      7.057093
+1703 Zimbabwe 2002   11926563    Africa   39.989 672.0386      7.076515
+1704 Zimbabwe 2007   12311143    Africa   43.487 469.7093      7.090298
+     ln_life_exp ln_gdpPercap
+1700    1.794843     6.559838
+1701    1.780872     6.541637
+1702    1.670329     6.675129
+1703    1.601941     6.510316
+1704    1.638359     6.152114
+\end{verbatim}
+
+\hypertarget{check-the-structure-of-the-data}{%
+\subsection{Check the structure of the
+data}\label{check-the-structure-of-the-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   1704 obs. of  9 variables:
+ $ country      : chr  "Afghanistan" "Afghanistan" "Afghanistan" "Afghanistan" ...
+ $ year         : int  1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+ $ population   : int  8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
+ $ continent    : chr  "Asia" "Asia" "Asia" "Asia" ...
+ $ life_exp     : num  28.8 30.3 32 34 36.1 ...
+ $ gdp_cap      : num  779 821 853 836 740 ...
+ $ ln_population: num  6.93 6.97 7.01 7.06 7.12 ...
+ $ ln_life_exp  : num  1.46 1.48 1.51 1.53 1.56 ...
+ $ ln_gdpPercap : num  6.66 6.71 6.75 6.73 6.61 ...
+\end{verbatim}
+
+\hypertarget{manual-data-entry}{%
+\subsection{Manual Data Entry}\label{manual-data-entry}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{45}\NormalTok{,}\DecValTok{65}\NormalTok{,}\DecValTok{34}\NormalTok{,}\DecValTok{32}\NormalTok{,}\DecValTok{23}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{56}\NormalTok{,}\DecValTok{76}\NormalTok{,}\DecValTok{45}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{21}\NormalTok{,}\DecValTok{45}\NormalTok{,}\DecValTok{34}\NormalTok{,}\DecValTok{56}\NormalTok{,}\DecValTok{54}\NormalTok{)}
+\NormalTok{age}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] 45 65 34 32 23 25 56 76 45 22 21 45 34 56 54
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{height }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{122}\NormalTok{,}\DecValTok{134}\NormalTok{,}\DecValTok{144}\NormalTok{,}\DecValTok{165}\NormalTok{,}\DecValTok{155}\NormalTok{,}\DecValTok{133}\NormalTok{,}\DecValTok{123}\NormalTok{,}\DecValTok{132}\NormalTok{,}\DecValTok{145}\NormalTok{,}\DecValTok{154}\NormalTok{,}\DecValTok{166}\NormalTok{,}\DecValTok{134}\NormalTok{,}\DecValTok{121}\NormalTok{,}\DecValTok{154}\NormalTok{,}\DecValTok{165}\NormalTok{)}
+\NormalTok{height}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] 122 134 144 165 155 133 123 132 145 154 166 134 121 154 165
+\end{verbatim}
+
+\hypertarget{column-binding}{%
+\subsection{Column Binding}\label{column-binding}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{height\_age }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(age, height)}
+\NormalTok{height\_age}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      age height
+ [1,]  45    122
+ [2,]  65    134
+ [3,]  34    144
+ [4,]  32    165
+ [5,]  23    155
+ [6,]  25    133
+ [7,]  56    123
+ [8,]  76    132
+ [9,]  45    145
+[10,]  22    154
+[11,]  21    166
+[12,]  45    134
+[13,]  34    121
+[14,]  56    154
+[15,]  54    165
+\end{verbatim}
+
+\hypertarget{data-framing}{%
+\subsection{Data Framing}\label{data-framing}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(age, height)}
+\FunctionTok{head}\NormalTok{(mydata,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  age height
+1  45    122
+2  65    134
+3  34    144
+4  32    165
+5  23    155
+\end{verbatim}
+
+\hypertarget{descriptive-statistics}{%
+\subsection{Descriptive Statistics}\label{descriptive-statistics}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(stargazer)}
+\FunctionTok{library}\NormalTok{(gtsummary)}
+\FunctionTok{stargazer}\NormalTok{(data[,}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{], }\AttributeTok{type =} \StringTok{"text"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+========================================================================
+Statistic       N        Mean         St. Dev.       Min        Max     
+------------------------------------------------------------------------
+population    1,704 29,601,212.000 106,157,897.000 60,011  1,318,683,096
+life_exp      1,704     59.474         12.917      23.599     82.603    
+gdp_cap       1,704   7,215.327       9,857.455    241.166  113,523.100 
+ln_population 1,704     6.847           0.697       4.778      9.120    
+ln_life_exp   1,704     1.763           0.101       1.373      1.917    
+ln_gdpPercap  1,704     8.159           1.241       5.485     11.640    
+------------------------------------------------------------------------
+\end{verbatim}
+
+\hypertarget{additional-way-of-displaying-summary-statistics.}{%
+\subsection{Additional Way of Displaying Summary
+Statistics.}\label{additional-way-of-displaying-summary-statistics.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Load the libraries}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(devtools)}
+\FunctionTok{library}\NormalTok{(predict3d)}
+\FunctionTok{library}\NormalTok{(psych)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(gtsummary)}
+\FunctionTok{library}\NormalTok{(DescTools)}
+\FunctionTok{library}\NormalTok{(nortest) }
+\FunctionTok{library}\NormalTok{(lmtest)}
+\FunctionTok{library}\NormalTok{(sandwich)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{display-the-summary-statistics}{%
+\subsection{Display the Summary
+Statistics}\label{display-the-summary-statistics}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+  \FunctionTok{describeBy}\NormalTok{(data[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{round}\NormalTok{(}\DecValTok{2}\NormalTok{) }
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0972}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0347}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0347}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0833}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0903}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0764}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0833}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0764}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0625}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0903}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0903}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0417}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0625}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 26\tabcolsep) * \real{0.0764}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+vars
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+sd
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+median
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+trimmed
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mad
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+min
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+max
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+range
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+skew
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+kurtosis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+se
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+year & 1 & 1704 & 1979.50 & 17.27 & 1979.50 & 1979.50 & 22.24 & 1952.00
+& 2.007000e+03 & 5.500000e+01 & 0.00 & -1.22 & 0.42 \\
+population & 2 & 1704 & 29601212.32 & 106157896.74 & 7023595.50 &
+11399459.45 & 7841473.62 & 60011.00 & 1.318683e+09 & 1.318623e+09 & 8.33
+& 77.62 & 2571683.45 \\
+continent* & 3 & 1704 & 2.33 & 1.21 & 2.00 & 2.27 & 1.48 & 1.00 &
+5.000000e+00 & 4.000000e+00 & 0.25 & -1.34 & 0.03 \\
+life\_exp & 4 & 1704 & 59.47 & 12.92 & 60.71 & 59.92 & 16.10 & 23.60 &
+8.260000e+01 & 5.900000e+01 & -0.25 & -1.13 & 0.31 \\
+gdp\_cap & 5 & 1704 & 7215.33 & 9857.45 & 3531.85 & 5221.44 & 4007.61 &
+241.17 & 1.135231e+05 & 1.132820e+05 & 3.84 & 27.40 & 238.80 \\
+ln\_population & 6 & 1704 & 6.85 & 0.70 & 6.85 & 6.85 & 0.62 & 4.78 &
+9.120000e+00 & 4.340000e+00 & 0.08 & 0.47 & 0.02 \\
+ln\_life\_exp & 7 & 1704 & 1.76 & 0.10 & 1.78 & 1.77 & 0.11 & 1.37 &
+1.920000e+00 & 5.400000e-01 & -0.57 & -0.66 & 0.00 \\
+ln\_gdpPercap & 8 & 1704 & 8.16 & 1.24 & 8.17 & 8.14 & 1.51 & 5.49 &
+1.164000e+01 & 6.150000e+00 & 0.11 & -0.95 & 0.03 \\
+\end{longtable}
+
+\end{document}

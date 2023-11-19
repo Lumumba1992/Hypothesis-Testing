@@ -1,0 +1,22 @@
+---
+title: "Mixing portrait and landscape"
+output:
+    pdf_document:
+        keep_tex: true
+        includes:
+            in_header: header.tex
+---
+```{r, echo=FALSE}
+library(xtable)
+```
+
+Portrait
+```{r, results='asis', echo=FALSE}
+print(xtable(summary(cars), caption="Landscape table"), comment=FALSE)
+```
+
+Landscape:
+```{r, results='asis', echo=FALSE}
+print(xtable(summary(cars), caption="Landscape table"),
+      floating.environment="sidewaystable", comment=FALSE)
+```
